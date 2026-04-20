@@ -10,7 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Code by Kalsara — Portfolio",
+  title: "Kalsara Maleesha",
   description:
     "Passionate Creative Designer and Developer, dedicated to crafting innovative solutions and exceptional digital experiences through modern technologies.",
 }
