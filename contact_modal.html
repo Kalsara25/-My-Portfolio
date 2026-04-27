@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Modal</title>
+    <!-- Using Tailwind via CDN as requested for pure HTML/CSS/JS setup -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#5851FF',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(88, 81, 255, 0.5)',
+                        'glow-lg': '0 0 40px rgba(88, 81, 255, 0.8)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Glassmorphic input custom styles */
+        .glass-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(88, 81, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            border-color: #5851FF;
+            box-shadow: 0 0 15px rgba(88, 81, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen flex items-center justify-center font-sans text-white relative overflow-hidden">
+    
+    <!-- Decorative background elements to highlight the backdrop-blur -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- Trigger Button (Get in touch circle) -->
+    <button id="openModalBtn" class="relative group w-28 h-28 bg-accent rounded-full flex items-center justify-center shadow-glow transition-all duration-300 hover:shadow-glow-lg hover:scale-105 active:scale-95">
+        <span class="text-center font-semibold text-sm leading-tight tracking-wide">
+            Get in<br>touch
+        </span>
+    </button>
+
+    <!-- Modal Backdrop -->
+    <!-- Opacity-0 and pointer-events-none by default to hide it without breaking transitions -->
+    <div id="modalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-md z-40 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        
+        <!-- Modal Container (Scale-in Transition) -->
+        <div id="modalContainer" class="bg-black/80 border border-white/10 rounded-2xl w-full max-w-lg p-8 relative shadow-2xl backdrop-blur-xl scale-95 transition-transform duration-300">
+            
+            <!-- Glow Accents inside the modal -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-accent/20 rounded-full blur-[60px] pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent/20 rounded-full blur-[60px] pointer-events-none"></div>
+
+            <!-- Close Button -->
+            <button id="closeModalBtn" class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-2">Let's build something<span class="text-accent">.</span></h2>
+                <p class="text-white/60 mb-8 max-w-sm">Reach out to discuss your next project, integration, or simply to say hello.</p>
+
+                <!-- Netlify Form -->
+                <!-- name="contact", method="POST", data-netlify="true" for Netlify's backend detection -->
+                <form name="contact" method="POST" data-netlify="true" class="space-y-5">
+                    
+                    <!-- Hidden field required by Netlify for forms initialized via JS/AJAX -->
+                    <input type="hidden" name="form-name" value="contact" />
+
+                    <!-- Full Name -->
+                    <div class="space-y-1">
+                        <label for="name" class="text-sm font-medium text-white/80">Full Name</label>
+                        <input type="text" id="name" name="name" required class="glass-input w-full px-4 py-3 rounded-lg text-white placeholder-white/30" placeholder="John Doe">
+                    </div>
+
+                    <!-- Client Email -->
+                    <div class="space-y-1">
+                        <label for="email" class="text-sm font-medium text-white/80">Client Email</label>
+                        <input type="email" id="email" name="email" required class="glass-input w-full px-4 py-3 rounded-lg text-white placeholder-white/30" placeholder="hello@example.com">
+                    </div>
+
+                    <!-- Service Selection -->
+                    <div class="space-y-1">
+                        <label for="service" class="text-sm font-medium text-white/80">Service Selection</label>
+                        <div class="relative">
+                            <select id="service" name="service" required class="glass-input w-full px-4 py-3 rounded-lg text-white appearance-none cursor-pointer">
+                                <option value="" disabled selected class="bg-zinc-900 text-white/50">Select a service</option>
+                                <option value="AI Integration" class="bg-zinc-900 text-white">AI Integration</option>
+                                <option value="Business Automation" class="bg-zinc-900 text-white">Business Automation</option>
+                                <option value="Web Development" class="bg-zinc-900 text-white">Web Development</option>
+                                <option value="UI/UX Design" class="bg-zinc-900 text-white">UI/UX Design</option>
+                                <option value="Data Analytics" class="bg-zinc-900 text-white">Data Analytics</option>
+                                <option value="Video Editing" class="bg-zinc-900 text-white">Video Editing</option>
+                                <option value="SaaS Development" class="bg-zinc-900 text-white">SaaS Development</option>
+                            </select>
+                            <!-- Custom dropdown arrow -->
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Message -->
+                    <div class="space-y-1">
+                        <label for="message" class="text-sm font-medium text-white/80">Project Message</label>
+                        <textarea id="message" name="message" rows="4" required class="glass-input w-full px-4 py-3 rounded-lg text-white placeholder-white/30 resize-none" placeholder="Tell me about your project..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full mt-4 bg-accent text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-[#6b64ff] hover:shadow-glow active:scale-95 group relative overflow-hidden">
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+                            Send Message
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vanilla Javascript Logic for Modal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.getElementById('openModalBtn');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const backdrop = document.getElementById('modalBackdrop');
+            const container = document.getElementById('modalContainer');
+
+            const openModal = () => {
+                backdrop.classList.remove('pointer-events-none');
+                backdrop.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            };
+
+            const closeModal = () => {
+                backdrop.classList.add('pointer-events-none');
+                backdrop.classList.add('opacity-0');
+                container.classList.remove('scale-100');
+                container.classList.add('scale-95');
+            };
+
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+
+            // Close on backdrop click (click outside)
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) {
+                    closeModal();
+                }
+            });
+
+            // Close on Escape key press
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !backdrop.classList.contains('pointer-events-none')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

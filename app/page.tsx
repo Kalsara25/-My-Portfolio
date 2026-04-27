@@ -8,15 +8,19 @@ import { ScrollScene } from "@/components/scroll-scene"
 
 export default function Page() {
   return (
-    <ScrollScene>
-      <main id="top" className="min-h-screen bg-background text-foreground">
-        <HeroSection />
-        <AboutSection />
-        <WorksSection />
-        <SkillsSection />
-        <ContactSection variant="dark" />
-        <SiteFooter />
-      </main>
-    </ScrollScene>
+    
+    
+    <div className="relative">
+      <ScrollScene>
+        <main id="top" className="relative min-h-screen bg-background text-foreground">
+          <HeroSection />
+          <AboutSection />
+          <WorksSection />
+          <SkillsSection />
+          <ContactSection variant="dark" />
+          <SiteFooter />
+        </main>
+      </ScrollScene>
+    </div>
   )
 }

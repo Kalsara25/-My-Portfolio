@@ -133,8 +133,12 @@ export function ScrollScene({ children }: { children: ReactNode }) {
   return (
     <div
       ref={rootRef}
-      style={{ perspective: "1600px", perspectiveOrigin: "50% 35%" }}
-      className="[&_[data-scene]]:transform-gpu"
+      style={{ 
+        perspective: "1600px", 
+        perspectiveOrigin: "50% 35%",
+        position: "relative" 
+      }}
+      className="relative w-full min-h-screen [&_[data-scene]]:transform-gpu"
     >
       {children}
     </div>

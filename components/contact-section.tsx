@@ -1,3 +1,8 @@
+"use client"
+
+import { useState } from "react"
+import { ContactModal } from "./ContactModal"
+
 export function ContactSection({
   variant = "light",
 }: {
@@ -7,6 +12,7 @@ export function ContactSection({
   const bg = isDark ? "bg-[#050505] text-white" : "bg-background text-foreground"
   const subText = isDark ? "text-white/50" : "text-muted-foreground"
   const line = isDark ? "border-white/15" : "border-border"
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <section id="contact" data-scene className={`relative ${bg}`}>
@@ -27,13 +33,13 @@ export function ContactSection({
         <div className="relative mt-20 md:mt-28">
           <div className={`border-t ${line}`} />
           {/* Blue CTA circle */}
-          <a
-            href="mailto:malishakalsara4@gmail.com"
-            aria-label="Get in touch via email"
-            className="absolute -top-20 right-6 md:right-20 lg:right-28 flex h-40 w-40 md:h-44 md:w-44 items-center justify-center rounded-full bg-[#4B4BF7] text-white text-sm md:text-base font-medium shadow-[0_12px_40px_-8px_rgba(75,75,247,0.55)] transition-transform hover:scale-105"
+          <button
+            onClick={() => setIsModalOpen(true)}
+            aria-label="Get in touch to open contact form"
+            className="absolute -top-20 right-6 md:right-20 lg:right-28 flex h-40 w-40 md:h-44 md:w-44 items-center justify-center rounded-full bg-[#5851FF] text-white text-sm md:text-base font-medium shadow-[0_12px_40px_-8px_rgba(88,81,255,0.55)] transition-transform hover:scale-105"
           >
             Get in touch
-          </a>
+          </button>
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:max-w-xl">
@@ -47,6 +53,8 @@ export function ContactSection({
           </div>
         </div>
       </div>
+      
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   )
 }

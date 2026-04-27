@@ -21,10 +21,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} dark`}>
-      <body className="font-sans antialiased bg-[#1a1a1a] text-foreground">
-        {children}
-        <Analytics />
+    <html lang="en" className={`${inter.variable} dark text-foreground`}>
+      
+      <body className="font-sans antialiased bg-[#1a1a1a] h-full overflow-x-hidden">
+        
+        
+        <main className="relative min-h-screen flex flex-col">
+          {children}
+          <Analytics />
+        </main>
+
       </body>
     </html>
   )
