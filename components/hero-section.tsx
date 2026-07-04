@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { SiteHeader } from "./site-header"
 import { FloatingDock } from "./floating-dock"
 import { MarqueeText } from "./marquee-text"
+import Image from "next/image"
 
 export function HeroSection() {
   const heroRef = useRef<HTMLElement>(null)
@@ -52,17 +53,25 @@ export function HeroSection() {
 
         {/* Layer 10: Site Header */}
         <div className="relative z-10 w-full">
+          <h1 className="sr-only">Kalsara Maleesha - AI Engineer, Creative Developer & UX Designer</h1>
           <SiteHeader variant="dark" />
         </div>
 
         {/* Layer 10: Your Portrait */}
-        <div className="relative flex-1 flex items-end justify-center overflow-visible">
-          <motion.img
-            src="/hero-portrait.jpg"
-            alt="Kalsara Maleesha"
+        <div className="relative flex-1 flex items-end justify-center overflow-visible h-full w-full">
+          <motion.div
             style={{ y: portraitY }}
-            className="relative z-10 h-[85vh] w-auto object-contain object-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-          />
+            className="relative z-10 h-[85vh] w-full max-w-3xl flex justify-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+          >
+            <Image
+              src="/hero-portrait.jpg"
+              alt="Kalsara Maleesha"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 1000px"
+              className="object-contain object-bottom"
+            />
+          </motion.div>
 
           {/* Layer 20: The BIG WHITE MARQUEE */}
           <div

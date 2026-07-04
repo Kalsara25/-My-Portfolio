@@ -18,7 +18,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-6 md:mt-10 -mb-4">
-          <h1
+          <div
             aria-label="Kalsara"
             className="select-none text-balance font-medium tracking-tight leading-none text-white"
             style={{
@@ -26,7 +26,7 @@ export function SiteFooter() {
             }}
           >
             Kalsara
-          </h1>
+          </div>
         </div>
       </div>
     </footer>

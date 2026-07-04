@@ -9,11 +9,11 @@ export function AboutSection() {
     >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-7" data-reveal>
-          <p className="text-pretty text-xl md:text-2xl lg:text-3xl leading-snug font-medium text-foreground">
+          <h2 className="text-pretty text-xl md:text-2xl lg:text-3xl leading-snug font-medium text-foreground">
             A curious student blending AI and creative design to build simple,
             functional, and visually compelling digital experiences — where
             every solution tells a story.
-          </p>
+          </h2>
         </div>
 
         <div className="md:col-span-5 md:col-start-9" data-reveal data-reveal-delay="0.15">
